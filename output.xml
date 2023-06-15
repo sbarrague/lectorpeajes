@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on win32)" generated="20230615 09:08:05.940" rpa="true" schemaversion="3">
+<suite id="s1" name="Tasks" source="c:\Users\sbarrague\Desktop\Escritorio\robocorpleerpdf\tasks.robot">
+<test id="s1-t1" name="Extract text from PDF files" line="23">
+<kw name="Subir PDF">
+<var>${archivo}</var>
+<kw name="Add Heading" library="RPA.Assistant">
+<arg>Peajes</arg>
+<doc>Add a centered heading text element</doc>
+<status status="PASS" starttime="20230615 09:08:08.773" endtime="20230615 09:08:08.773"/>
+</kw>
+<kw name="Add Text Input" library="RPA.Assistant">
+<arg>Nombre Archivo con extensión</arg>
+<arg>default=archivo.pdf</arg>
+<tag>input</tag>
+<doc>Add a text input element</doc>
+<status status="PASS" starttime="20230615 09:08:08.774" endtime="20230615 09:08:08.774"/>
+</kw>
+<kw name="Add Submit Buttons" library="RPA.Assistant">
+<arg>buttons=Cargar</arg>
+<arg>default=Cargar</arg>
+<tag>input</tag>
+<doc>Add custom submit buttons</doc>
+<status status="PASS" starttime="20230615 09:08:08.774" endtime="20230615 09:08:08.775"/>
+</kw>
+<kw name="Run Dialog" library="RPA.Assistant">
+<var>${response}</var>
+<tag>dialog</tag>
+<doc>Create a dialog from all the defined elements and block
+until the user has handled it.</doc>
+<msg timestamp="20230615 09:08:08.775" level="INFO">Protecting keyword: RPA.Assistant.Run Dialog</msg>
+<msg timestamp="20230615 09:08:14.998" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20230615 09:08:08.775" endtime="20230615 09:08:14.997"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 09:08:14.999" level="INFO">{'Nombre Archivo con extensión': '1.pdf', 'submit': 'Cargar'}</msg>
+<status status="PASS" starttime="20230615 09:08:14.998" endtime="20230615 09:08:15.001"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response}[Nombre Archivo con extensión]</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 09:08:15.002" level="INFO">1.pdf</msg>
+<status status="PASS" starttime="20230615 09:08:15.002" endtime="20230615 09:08:15.003"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${archivo}</var>
+<arg>R:\\COMPARTIDA\\Robocorp\\Peajes\\${response}[Nombre Archivo con extensión]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 09:08:15.005" level="INFO">${archivo} = R:\COMPARTIDA\Robocorp\Peajes\1.pdf</msg>
+<status status="PASS" starttime="20230615 09:08:15.003" endtime="20230615 09:08:15.005"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${archivo}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 09:08:15.006" level="INFO">R:\COMPARTIDA\Robocorp\Peajes\1.pdf</msg>
+<status status="PASS" starttime="20230615 09:08:15.006" endtime="20230615 09:08:15.006"/>
+</kw>
+<return>
+<value>${archivo}</value>
+<status status="PASS" starttime="20230615 09:08:15.006" endtime="20230615 09:08:15.006"/>
+</return>
+<msg timestamp="20230615 09:08:15.007" level="INFO">${archivo} = R:\COMPARTIDA\Robocorp\Peajes\1.pdf</msg>
+<status status="PASS" starttime="20230615 09:08:08.772" endtime="20230615 09:08:15.007"/>
+</kw>
+<kw name="Conectarse a Softland">
+<kw name="Connect To Database" library="RPA.Database">
+<arg>pymssql</arg>
+<arg>GRUPO_BERALDI</arg>
+<arg>SA</arg>
+<arg>Power2020*</arg>
+<arg>SRVBERALDIERP</arg>
+<doc>Connect to database using DB API 2.0 module.</doc>
+<msg timestamp="20230615 09:08:15.010" level="INFO">Protecting keyword: RPA.Database.Connect To Database</msg>
+<msg timestamp="20230615 09:08:15.181" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20230615 09:08:15.009" endtime="20230615 09:08:15.181"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:15.008" endtime="20230615 09:08:15.182"/>
+</kw>
+<kw name="Extraer texto de PDF a txt">
+<arg>${archivo}</arg>
+<kw name="Get Text From Pdf" library="RPA.PDF">
+<var>${text}</var>
+<arg>${archivo}</arg>
+<doc>Get text from set of pages in source PDF document.</doc>
+<msg timestamp="20230615 09:08:18.160" level="INFO">${text} = {1: 'DETALLE DE OPERACIONESHoja1ClienteBERALDI CITESA TRANSPORTECódigo\nDomic.908030707441514/1\nPINZON 1129 P. 2\n1161 CAPITAL FEDERALPeríodo202304Ciclo190969491Dominio:KNT002Bonif.FechaHoraEstación ...</msg>
+<status status="PASS" starttime="20230615 09:08:15.183" endtime="20230615 09:08:18.160"/>
+</kw>
+<kw name="Create File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>overwrite=True</arg>
+<doc>Creates a new text file, and writes content if any is given.</doc>
+<msg timestamp="20230615 09:08:18.160" level="WARN">Keyword 'Create File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Create File' or 'OperatingSystem.Create File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.160" endtime="20230615 09:08:18.181"/>
+</kw>
+<for flavor="IN">
+<var>${page}</var>
+<value>@{text.keys()}</value>
+<iter>
+<var name="${page}">1</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.181" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.181" endtime="20230615 09:08:18.231"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.181" endtime="20230615 09:08:18.231"/>
+</iter>
+<iter>
+<var name="${page}">2</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.231" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.231" endtime="20230615 09:08:18.305"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.231" endtime="20230615 09:08:18.305"/>
+</iter>
+<iter>
+<var name="${page}">3</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.307" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.307" endtime="20230615 09:08:18.362"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.306" endtime="20230615 09:08:18.362"/>
+</iter>
+<iter>
+<var name="${page}">4</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.363" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.363" endtime="20230615 09:08:18.425"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.363" endtime="20230615 09:08:18.426"/>
+</iter>
+<iter>
+<var name="${page}">5</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.428" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.428" endtime="20230615 09:08:18.484"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.426" endtime="20230615 09:08:18.487"/>
+</iter>
+<iter>
+<var name="${page}">6</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.489" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.489" endtime="20230615 09:08:18.550"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.488" endtime="20230615 09:08:18.552"/>
+</iter>
+<iter>
+<var name="${page}">7</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.556" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.556" endtime="20230615 09:08:18.614"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.553" endtime="20230615 09:08:18.619"/>
+</iter>
+<iter>
+<var name="${page}">8</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.620" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.620" endtime="20230615 09:08:18.682"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.620" endtime="20230615 09:08:18.683"/>
+</iter>
+<iter>
+<var name="${page}">9</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.686" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.687" endtime="20230615 09:08:18.746"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.684" endtime="20230615 09:08:18.747"/>
+</iter>
+<iter>
+<var name="${page}">10</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.747" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.747" endtime="20230615 09:08:18.809"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.747" endtime="20230615 09:08:18.809"/>
+</iter>
+<iter>
+<var name="${page}">11</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.810" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.810" endtime="20230615 09:08:18.863"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.810" endtime="20230615 09:08:18.863"/>
+</iter>
+<iter>
+<var name="${page}">12</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.864" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.864" endtime="20230615 09:08:18.915"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.863" endtime="20230615 09:08:18.915"/>
+</iter>
+<iter>
+<var name="${page}">13</var>
+<kw name="Append To File" library="RPA.FileSystem">
+<arg>${archivo}.txt</arg>
+<arg>${text[${page}]}</arg>
+<doc>Appends text to the given file.</doc>
+<msg timestamp="20230615 09:08:18.918" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<status status="PASS" starttime="20230615 09:08:18.918" endtime="20230615 09:08:18.993"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:18.915" endtime="20230615 09:08:18.993"/>
+</iter>
+<status status="PASS" starttime="20230615 09:08:18.181" endtime="20230615 09:08:18.993"/>
+</for>
+<status status="PASS" starttime="20230615 09:08:15.182" endtime="20230615 09:08:18.993"/>
+</kw>
+<kw name="Leer Archivo y Extraer Dominios">
+<var>${dominios}</var>
+<arg>${archivo}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${archivotxt}</var>
+<arg>${archivo}.txt</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 09:08:18.996" level="INFO">${archivotxt} = R:\COMPARTIDA\Robocorp\Peajes\1.pdf.txt</msg>
+<status status="PASS" starttime="20230615 09:08:18.995" endtime="20230615 09:08:18.997"/>
+</kw>
+<kw name="Get File" library="OperatingSystem">
+<var>${contenido}</var>
+<arg>${archivotxt}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20230615 09:08:18.997" level="INFO" html="true">Getting file '&lt;a href="file://R:\COMPARTIDA\Robocorp\Peajes\1.pdf.txt"&gt;R:\COMPARTIDA\Robocorp\Peajes\1.pdf.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20230615 09:08:19.091" level="INFO">${contenido} = DETALLE DE OPERACIONESHoja1ClienteBERALDI CITESA TRANSPORTECódigo
+Domic.908030707441514/1
+PINZON 1129 P. 2
+1161 CAPITAL FEDERALPeríodo202304Ciclo190969491Dominio:KNT002Bonif.FechaHoraEstación de Peaje...</msg>
+<status status="PASS" starttime="20230615 09:08:18.997" endtime="20230615 09:08:19.091"/>
+</kw>
+<kw name="Extraer Patentes" library="leercontenido">
+<var>${dominios}</var>
+<arg>${contenido}</arg>
+<msg timestamp="20230615 09:08:19.094" level="INFO">${dominios} = ['KNT-002', 'AA859SA', 'HWZ-687', 'KEA-555', 'AB340EZ', 'MZM-681', 'AB813CT', 'AB813CS', 'AB912IM', 'MZM-683', 'AC290VE', 'AB813BM', 'AD266JX', 'AD364ZF', 'NLP-014', 'FGV-497', 'NLP-017', 'AE853WU', '...</msg>
+<status status="PASS" starttime="20230615 09:08:19.093" endtime="20230615 09:08:19.094"/>
+</kw>
+<return>
+<value>${dominios}</value>
+<status status="PASS" starttime="20230615 09:08:19.095" endtime="20230615 09:08:19.095"/>
+</return>
+<msg timestamp="20230615 09:08:19.095" level="INFO">${dominios} = ['KNT-002', 'AA859SA', 'HWZ-687', 'KEA-555', 'AB340EZ', 'MZM-681', 'AB813CT', 'AB813CS', 'AB912IM', 'MZM-683', 'AC290VE', 'AB813BM', 'AD266JX', 'AD364ZF', 'NLP-014', 'FGV-497', 'NLP-017', 'AE853WU', '...</msg>
+<status status="PASS" starttime="20230615 09:08:18.994" endtime="20230615 09:08:19.096"/>
+</kw>
+<kw name="Consultar si patente esta dada de baja en Softland">
+<var>${result}</var>
+<arg>@{dominios}</arg>
+<kw name="Create List" library="BuiltIn">
+<var>${dominios_in_query}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20230615 09:08:19.097" level="INFO">${dominios_in_query} = []</msg>
+<status status="PASS" starttime="20230615 09:08:19.097" endtime="20230615 09:08:19.097"/>
+</kw>
+<for flavor="IN">
+<var>${dominio}</var>
+<value>@{dominios}</value>
+<iter>
+<var name="${dominio}">KNT-002</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.101" endtime="20230615 09:08:19.104"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.100" endtime="20230615 09:08:19.105"/>
+</iter>
+<iter>
+<var name="${dominio}">AA859SA</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.107" endtime="20230615 09:08:19.108"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.105" endtime="20230615 09:08:19.108"/>
+</iter>
+<iter>
+<var name="${dominio}">HWZ-687</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.109" endtime="20230615 09:08:19.109"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.108" endtime="20230615 09:08:19.109"/>
+</iter>
+<iter>
+<var name="${dominio}">KEA-555</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.110" endtime="20230615 09:08:19.110"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.109" endtime="20230615 09:08:19.110"/>
+</iter>
+<iter>
+<var name="${dominio}">AB340EZ</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.111" endtime="20230615 09:08:19.111"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.111" endtime="20230615 09:08:19.111"/>
+</iter>
+<iter>
+<var name="${dominio}">MZM-681</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.112" endtime="20230615 09:08:19.112"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.111" endtime="20230615 09:08:19.112"/>
+</iter>
+<iter>
+<var name="${dominio}">AB813CT</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.113" endtime="20230615 09:08:19.113"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.112" endtime="20230615 09:08:19.113"/>
+</iter>
+<iter>
+<var name="${dominio}">AB813CS</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.113" endtime="20230615 09:08:19.114"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.113" endtime="20230615 09:08:19.114"/>
+</iter>
+<iter>
+<var name="${dominio}">AB912IM</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.114" endtime="20230615 09:08:19.114"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.114" endtime="20230615 09:08:19.114"/>
+</iter>
+<iter>
+<var name="${dominio}">MZM-683</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.114" endtime="20230615 09:08:19.116"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.114" endtime="20230615 09:08:19.116"/>
+</iter>
+<iter>
+<var name="${dominio}">AC290VE</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.116" endtime="20230615 09:08:19.117"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.116" endtime="20230615 09:08:19.117"/>
+</iter>
+<iter>
+<var name="${dominio}">AB813BM</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.117" endtime="20230615 09:08:19.118"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.117" endtime="20230615 09:08:19.118"/>
+</iter>
+<iter>
+<var name="${dominio}">AD266JX</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.119" endtime="20230615 09:08:19.119"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.118" endtime="20230615 09:08:19.119"/>
+</iter>
+<iter>
+<var name="${dominio}">AD364ZF</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.120" endtime="20230615 09:08:19.121"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.119" endtime="20230615 09:08:19.122"/>
+</iter>
+<iter>
+<var name="${dominio}">NLP-014</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.124" endtime="20230615 09:08:19.124"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.123" endtime="20230615 09:08:19.124"/>
+</iter>
+<iter>
+<var name="${dominio}">FGV-497</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.125" endtime="20230615 09:08:19.125"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.124" endtime="20230615 09:08:19.125"/>
+</iter>
+<iter>
+<var name="${dominio}">NLP-017</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.125" endtime="20230615 09:08:19.126"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.125" endtime="20230615 09:08:19.126"/>
+</iter>
+<iter>
+<var name="${dominio}">AE853WU</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.126" endtime="20230615 09:08:19.127"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.126" endtime="20230615 09:08:19.127"/>
+</iter>
+<iter>
+<var name="${dominio}">AE853WS</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.127" endtime="20230615 09:08:19.128"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.127" endtime="20230615 09:08:19.128"/>
+</iter>
+<iter>
+<var name="${dominio}">LLL-225</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.128" endtime="20230615 09:08:19.128"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.128" endtime="20230615 09:08:19.129"/>
+</iter>
+<iter>
+<var name="${dominio}">AE583MG</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.129" endtime="20230615 09:08:19.129"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.129" endtime="20230615 09:08:19.129"/>
+</iter>
+<iter>
+<var name="${dominio}">AE583MI</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.130"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.130"/>
+</iter>
+<iter>
+<var name="${dominio}">AE583MV</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.130"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.130"/>
+</iter>
+<iter>
+<var name="${dominio}">LVK-472</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.130"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.130"/>
+</iter>
+<iter>
+<var name="${dominio}">AE324SO</var>
+<kw name="Append To List" library="Collections">
+<arg>${dominios_in_query}</arg>
+<arg>${dominio}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.133"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:19.130" endtime="20230615 09:08:19.133"/>
+</iter>
+<status status="PASS" starttime="20230615 09:08:19.097" endtime="20230615 09:08:19.133"/>
+</for>
+<kw name="Evaluate" library="BuiltIn">
+<var>${formatted_dominios}</var>
+<arg>', '.join(["'{}'".format(domain) for domain in @{dominios}])</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230615 09:08:19.135" level="INFO">${formatted_dominios} = 'KNT-002', 'AA859SA', 'HWZ-687', 'KEA-555', 'AB340EZ', 'MZM-681', 'AB813CT', 'AB813CS', 'AB912IM', 'MZM-683', 'AC290VE', 'AB813BM', 'AD266JX', 'AD364ZF', 'NLP-014', 'FGV-497', 'NLP-017', 'AE853WU', 'A...</msg>
+<status status="PASS" starttime="20230615 09:08:19.134" endtime="20230615 09:08:19.136"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${query}</var>
+<arg>SELECT MEMEQH_CODIGO, MEMEQH_DEBAJA FROM MEMEQH WHERE MEMEQH_CODIGO IN (${formatted_dominios})</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 09:08:19.139" level="INFO">${query} = SELECT MEMEQH_CODIGO, MEMEQH_DEBAJA FROM MEMEQH WHERE MEMEQH_CODIGO IN ('KNT-002', 'AA859SA', 'HWZ-687', 'KEA-555', 'AB340EZ', 'MZM-681', 'AB813CT', 'AB813CS', 'AB912IM', 'MZM-683', 'AC290VE', 'AB813B...</msg>
+<status status="PASS" starttime="20230615 09:08:19.137" endtime="20230615 09:08:19.139"/>
+</kw>
+<kw name="Query" library="RPA.Database">
+<var>${result}</var>
+<arg>${query}</arg>
+<doc>Execute a SQL query and optionally return the execution result.</doc>
+<msg timestamp="20230615 09:08:19.142" level="INFO">Executing query: SELECT MEMEQH_CODIGO, MEMEQH_DEBAJA FROM MEMEQH WHERE MEMEQH_CODIGO IN ('KNT-002', 'AA859SA', 'HWZ-687', 'KEA-555', 'AB340EZ', 'MZM-681', 'AB813CT', 'AB813CS', 'AB912IM', 'MZM-683', 'AC290VE', 'AB813BM', 'AD266JX', 'AD364ZF', 'NLP-014', 'FGV-497', 'NLP-017', 'AE853WU', 'AE853WS', 'LLL-225', 'AE583MG', 'AE583MI', 'AE583MV', 'LVK-472', 'AE324SO')</msg>
+<msg timestamp="20230615 09:08:19.177" level="INFO">${result} = Table(columns=['MEMEQH_CODIGO', 'MEMEQH_DEBAJA'], rows=24)</msg>
+<status status="PASS" starttime="20230615 09:08:19.140" endtime="20230615 09:08:19.177"/>
+</kw>
+<return>
+<value>${result}</value>
+<status status="PASS" starttime="20230615 09:08:19.178" endtime="20230615 09:08:19.178"/>
+</return>
+<msg timestamp="20230615 09:08:19.179" level="INFO">${result} = Table(columns=['MEMEQH_CODIGO', 'MEMEQH_DEBAJA'], rows=24)</msg>
+<status status="PASS" starttime="20230615 09:08:19.097" endtime="20230615 09:08:19.179"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 09:08:19.181" level="INFO">Table(columns=['MEMEQH_CODIGO', 'MEMEQH_DEBAJA'], rows=24)</msg>
+<status status="PASS" starttime="20230615 09:08:19.180" endtime="20230615 09:08:19.181"/>
+</kw>
+<kw name="Write table to CSV" library="RPA.Tables">
+<arg>${result}</arg>
+<arg>${archivo}.csv</arg>
+<doc>Write a table as a CSV file.</doc>
+<status status="PASS" starttime="20230615 09:08:19.182" endtime="20230615 09:08:19.254"/>
+</kw>
+<status status="PASS" starttime="20230615 09:08:08.771" endtime="20230615 09:08:19.258"/>
+</test>
+<doc>Read the text contained in PDF files and save it to a
+corresponding text file.</doc>
+<status status="PASS" starttime="20230615 09:08:05.949" endtime="20230615 09:08:19.261"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20230615 09:08:18.160" level="WARN">Keyword 'Create File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Create File' or 'OperatingSystem.Create File'.</msg>
+<msg timestamp="20230615 09:08:18.181" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.231" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.307" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.363" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.428" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.489" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.556" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.620" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.686" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.747" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.810" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.864" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+<msg timestamp="20230615 09:08:18.918" level="WARN">Keyword 'Append To File' found both from a custom library 'RPA.FileSystem' and a standard library 'OperatingSystem'. The custom keyword is used. To select explicitly, and to get rid of this warning, use either 'RPA.FileSystem.Append To File' or 'OperatingSystem.Append To File'.</msg>
+</errors>
+</robot>
